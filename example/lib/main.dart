@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   isDebug: false,
                   uid: 'ec774d32-8c3d-4df5-af5e-77e5177f4d1d',
                   email: 'user@softnux.io',
-                  environment: 'stg',
+                  environment: 'stg', // stg -> developer or prod -> production
                   paymentClientAppCode: 'TPP3-EC-CLIENT',
                   paymentClientAppKey: '*********************',
                   background: 'F3F3F5',
