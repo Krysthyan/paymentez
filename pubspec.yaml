@@ -1,11 +1,11 @@
 name: paymentez
 description: Paquete para agregar tarjetas en paymentez, sirve para proyectos que no tienen certificación PCI.
-version: 1.0.0
+version: 1.0.1
 author: Cristhian Hernandez <cristhian.hernandez@softnux.io>
 homepage: https://github.com/Krysthyan/paymentez
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
   flutter: ">=1.17.0"
 
 dependencies:

@@ -13,18 +13,18 @@ class DataModel {
   });
 
   /// status of package is: success, review, failure, error
-  String status;
+  String? status;
 
   /// model return add card of paymentez
-  Card card;
+  Card? card;
 
   // model error if error request paymentez
-  Error error;
+  Error? error;
 
   DataModel copyWith({
-    String status,
-    Card card,
-    Error error,
+    String? status,
+    Card? card,
+    Error? error,
   }) =>
       DataModel(
         status: status ?? this.status,
@@ -44,8 +44,8 @@ class DataModel {
 
   Map<String, dynamic> toMap() => {
         "status": status == null ? null : status,
-        "card": card == null ? null : card.toMap(),
-        "error": error == null ? null : error.toMap(),
+        "card": card == null ? null : card!.toMap(),
+        "error": error == null ? null : error!.toMap(),
       };
 }
 
@@ -65,46 +65,46 @@ class Card {
   });
 
   /// bin
-  String bin;
+  String? bin;
 
   /// status
-  String status;
+  String? status;
 
   /// token
-  String token;
+  String? token;
 
   /// message
-  String message;
+  String? message;
 
   /// expiryYear
-  String expiryYear;
+  String? expiryYear;
 
   /// expiryMount
-  String expiryMonth;
+  String? expiryMonth;
 
   /// transactionReference
-  String transactionReference;
+  String? transactionReference;
 
   /// type
-  String type;
+  String? type;
 
   /// number
-  String number;
+  String? number;
 
   ///origin
-  String origin;
+  String? origin;
 
   Card copyWith({
-    String bin,
-    String status,
-    String token,
-    String message,
-    String expiryYear,
-    String expiryMonth,
-    String transactionReference,
-    String type,
-    String number,
-    String origin,
+    String? bin,
+    String? status,
+    String? token,
+    String? message,
+    String? expiryYear,
+    String? expiryMonth,
+    String? transactionReference,
+    String? type,
+    String? number,
+    String? origin,
   }) =>
       Card(
         bin: bin ?? this.bin,
@@ -161,14 +161,14 @@ class Error {
   });
 
   /// type
-  String type;
+  String? type;
 
   // help
-  String help;
+  String? help;
 
   Error copyWith({
-    String type,
-    String help,
+    String? type,
+    String? help,
   }) =>
       Error(
         type: type ?? this.type,

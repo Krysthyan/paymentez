@@ -5,21 +5,21 @@ import '../../paymentez.dart';
 
 /// Method to open a dialog and display the Paymentez html form: https://developers.paymentez.com/docs/payments/#javascript
 void showDialogPaymentez(
-    {@required BuildContext context,
-    @required Function(DataModel, InAppWebViewController) funReturnData,
-    @required String uid,
-    @required String email,
-    @required String environment,
-    @required String paymentClientAppCode,
-    @required String paymentClientAppKey,
-    String background,
-    String btnBackground1,
-    String btnBackground2,
-    String textAddCard,
-    String textProcessingCard,
-    String btnTextCancel,
-    Color btnColorCancel,
-    bool isDebug}) async {
+    {required BuildContext context,
+    required Function(DataModel, InAppWebViewController) funReturnData,
+    required String uid,
+    required String email,
+    required String environment,
+    required String paymentClientAppCode,
+    required String paymentClientAppKey,
+    String? background,
+    String? btnBackground1,
+    String? btnBackground2,
+    String? textAddCard,
+    String? textProcessingCard,
+    String? btnTextCancel,
+    Color? btnColorCancel,
+    bool? isDebug}) async {
   showDialog(
       context: context,
       barrierDismissible: false,
@@ -64,9 +64,6 @@ void showDialogPaymentez(
                       controller.addJavaScriptHandler(
                           handlerName: 'sendDataUser',
                           callback: (args) {
-                            print('099999999999999');
-                            print(email);
-                            print(paymentClientAppKey);
                             return {
                               'uid': uid,
                               'email': email,
@@ -88,7 +85,7 @@ void showDialogPaymentez(
                                 DataModel.fromMap(args[0]), controller);
                           });
                     },
-                    onConsoleMessage: (isDebug)
+                    onConsoleMessage: isDebug!
                         ? (controller, consoleMessage) {
                             print(consoleMessage.message);
                           }

@@ -61,7 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     switch (data.status) {
                       case 'success':
                         print('success card with paymentez');
+
+                        // metodo controller del web view para cerrar la ventana
                         controller.goBack();
+
+                        // metodo para cerrar el Dialog
                         Navigator.of(context).pop();
                         break;
 
