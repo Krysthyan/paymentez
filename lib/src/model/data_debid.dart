@@ -37,16 +37,16 @@ class DataModel {
   String toJson() => json.encode(toMap());
 
   factory DataModel.fromMap(Map<String, dynamic> json) => DataModel(
-    status: json["status"] == null ? null : json["status"],
-    card: json["card"] == null ? null : Card.fromMap(json["card"]),
-    error: json["error"] == null ? null : Error.fromJson(json["error"]),
-  );
+        status: json["status"] == null ? null : json["status"],
+        card: json["card"] == null ? null : Card.fromMap(json["card"]),
+        error: json["error"] == null ? null : Error.fromJson(json["error"]),
+      );
 
   Map<String, dynamic> toMap() => {
-    "status": status == null ? null : status,
-    "card": card == null ? null : card.toMap(),
-    "error": error == null ? null : error.toMap(),
-  };
+        "status": status == null ? null : status,
+        "card": card == null ? null : card.toMap(),
+        "error": error == null ? null : error.toMap(),
+      };
 }
 
 /// model return add card of paymentez
@@ -124,30 +124,33 @@ class Card {
   String toJson() => json.encode(toMap());
 
   factory Card.fromMap(Map<String, dynamic> json) => Card(
-    bin: json["bin"] == null ? null : json["bin"],
-    status: json["status"] == null ? null : json["status"],
-    token: json["token"] == null ? null : json["token"],
-    message: json["message"] == null ? null : json["message"],
-    expiryYear: json["expiry_year"] == null ? null : json["expiry_year"],
-    expiryMonth: json["expiry_month"] == null ? null : json["expiry_month"],
-    transactionReference: json["transaction_reference"] == null ? null : json["transaction_reference"],
-    type: json["type"] == null ? null : json["type"],
-    number: json["number"] == null ? null : json["number"],
-    origin: json["origin"] == null ? null : json["origin"],
-  );
+        bin: json["bin"] == null ? null : json["bin"],
+        status: json["status"] == null ? null : json["status"],
+        token: json["token"] == null ? null : json["token"],
+        message: json["message"] == null ? null : json["message"],
+        expiryYear: json["expiry_year"] == null ? null : json["expiry_year"],
+        expiryMonth: json["expiry_month"] == null ? null : json["expiry_month"],
+        transactionReference: json["transaction_reference"] == null
+            ? null
+            : json["transaction_reference"],
+        type: json["type"] == null ? null : json["type"],
+        number: json["number"] == null ? null : json["number"],
+        origin: json["origin"] == null ? null : json["origin"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "bin": bin == null ? null : bin,
-    "status": status == null ? null : status,
-    "token": token == null ? null : token,
-    "message": message == null ? null : message,
-    "expiry_year": expiryYear == null ? null : expiryYear,
-    "expiry_month": expiryMonth == null ? null : expiryMonth,
-    "transaction_reference": transactionReference == null ? null : transactionReference,
-    "type": type == null ? null : type,
-    "number": number == null ? null : number,
-    "origin": origin == null ? null : origin,
-  };
+        "bin": bin == null ? null : bin,
+        "status": status == null ? null : status,
+        "token": token == null ? null : token,
+        "message": message == null ? null : message,
+        "expiry_year": expiryYear == null ? null : expiryYear,
+        "expiry_month": expiryMonth == null ? null : expiryMonth,
+        "transaction_reference":
+            transactionReference == null ? null : transactionReference,
+        "type": type == null ? null : type,
+        "number": number == null ? null : number,
+        "origin": origin == null ? null : origin,
+      };
 }
 
 /// class error return paymentez
@@ -177,12 +180,12 @@ class Error {
   String toJson() => json.encode(toMap());
 
   factory Error.fromMap(Map<String, dynamic> json) => Error(
-    type: json["type"] == null ? null : json["type"],
-    help: json["help"] == null ? null : json["help"],
-  );
+        type: json["type"] == null ? null : json["type"],
+        help: json["help"] == null ? null : json["help"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "type": type == null ? null : type,
-    "help": help == null ? null : help,
-  };
+        "type": type == null ? null : type,
+        "help": help == null ? null : help,
+      };
 }

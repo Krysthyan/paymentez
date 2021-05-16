@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'dart:io';
 
 import '../../paymentez.dart';
 
 /// Method to open a dialog and display the Paymentez html form: https://developers.paymentez.com/docs/payments/#javascript
 void showDialogPaymentez(
-    {
-      @required BuildContext context,
-      @required Function(DataModel, InAppWebViewController) funReturnData,
-      @required String uid,
-      @required String email,
-      @required String environment,
-      @required String paymentClientAppCode,
-      @required String paymentClientAppKey,
-      String background,
-      String btnBackground1,
-      String btnBackground2,
-      String textAddCard,
-      String textProcessingCard,
-      String btnTextCancel,
-      Color btnColorCancel,
-      bool isDebug
-    }) async {
-
+    {@required BuildContext context,
+    @required Function(DataModel, InAppWebViewController) funReturnData,
+    @required String uid,
+    @required String email,
+    @required String environment,
+    @required String paymentClientAppCode,
+    @required String paymentClientAppKey,
+    String background,
+    String btnBackground1,
+    String btnBackground2,
+    String textAddCard,
+    String textProcessingCard,
+    String btnTextCancel,
+    Color btnColorCancel,
+    bool isDebug}) async {
   showDialog(
       context: context,
       barrierDismissible: false,
@@ -42,10 +38,10 @@ void showDialogPaymentez(
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  color: btnColorCancel??Colors.black45,
+                  color: btnColorCancel ?? Colors.black45,
                   child: TextButton(
                     child: Text(
-                      btnTextCancel??"Cancelar",
+                      btnTextCancel ?? "Cancelar",
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
@@ -72,30 +68,31 @@ void showDialogPaymentez(
                             print(email);
                             print(paymentClientAppKey);
                             return {
-                              'uid':  uid,
+                              'uid': uid,
                               'email': email,
                               'environment': environment,
                               'paymentClientAppCode': paymentClientAppCode,
                               'paymentClientAppKey': paymentClientAppKey,
-                              'background': background??'c9b608',
-                              'text_add_card': textAddCard??'Add card',
-                              'btn_background1': btnBackground1??'614ea3',
-                              'btn_background2': btnBackground2??'382578',
-                              'message_processing_card': textProcessingCard??'Procesando tarjeta'
+                              'background': background ?? 'c9b608',
+                              'text_add_card': textAddCard ?? 'Add card',
+                              'btn_background1': btnBackground1 ?? '614ea3',
+                              'btn_background2': btnBackground2 ?? '382578',
+                              'message_processing_card':
+                                  textProcessingCard ?? 'Procesando tarjeta'
                             };
                           });
                       controller.addJavaScriptHandler(
                           handlerName: 'return_data',
                           callback: (args) {
-                            funReturnData(DataModel.fromMap(args[0]), controller);
+                            funReturnData(
+                                DataModel.fromMap(args[0]), controller);
                           });
-
-
                     },
-                    onConsoleMessage:(isDebug) ? (controller, consoleMessage) {
-                      print(consoleMessage.message);
-                    } : null,
-
+                    onConsoleMessage: (isDebug)
+                        ? (controller, consoleMessage) {
+                            print(consoleMessage.message);
+                          }
+                        : null,
                   ),
                 )
               ],

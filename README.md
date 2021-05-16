@@ -10,7 +10,7 @@ Seguir las instrucciones en [here](https://pub.dev/packages/paymentez/install)
 
 ## Usar Demo
 
-Antes de usar el ejempo, necesitas las credenciales de paymentez paymentClientAppCode, paymentClientAppKey
+Antes de usar el ejemplo, necesitas las credenciales de paymentez paymentClientAppCode, paymentClientAppKey
 Para obtenerlas tienes que contactarte con Paymentez. Esos dos datos debes agregarlos en el archivo main.dart.
 
 ```dart
