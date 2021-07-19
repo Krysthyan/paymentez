@@ -1,146 +1,256 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Paymentez</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <title>Paymentez</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+      body {
+        font-family: "Montserrat", monospace;
+        font-size: 22px;
+      }
 
-  <link href="https://cdn.paymentez.com/ccapi/sdk/payment_stable.min.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.paymentez.com/ccapi/sdk/payment_stable.min.js" charset="UTF-8"></script>
+      .panel {
+        margin: 30px auto;
+        background-color: #ffffff;
+        border: 1px solid #f3f3f5;
+        padding: 15px;
 
-  <style>
-    body {
-      font-family: 'Montserrat', monospace;
-      font-size: 22px;
-    }
+        display: block;
+        width: 85%;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
 
-    .panel {
-      margin: 30px auto;
-      background-color: #FFFFFF;
-      border: 1px solid #F3F3F5;
-      padding: 15px;
+      .btn {
+        background: #e7004c;
+        /* Old browsers */
+        background: -moz-linear-gradient(top, #f02b6c 0%, #e7004c 100%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #f02b6c 0%, #e7004c 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #f02b6c 0%, #e7004c 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44afe7', endColorstr='#3198df', GradientType=0);
+        color: #fff;
+        display: block;
+        width: 100%;
+        border: 1px solid rgba(46, 86, 153, 0.0980392);
+        border-bottom-color: rgba(46, 86, 153, 0.4);
+        border-top: 0;
+        border-radius: 4px;
+        font-size: 15px;
+        text-shadow: rgba(46, 86, 153, 0.298039) 0px -1px 0px;
+        line-height: 34px;
+        font-family: "Montserrat", monospace;
+        -webkit-font-smoothing: antialiased;
+        font-weight: bold;
+        display: block;
+        margin-top: 20px;
+      }
 
-      display: block;
-      width: 85%;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
-    }
+      .btn:hover {
+        cursor: pointer;
+      }
 
-    .btn {
-      background: #E7004C;
-      /* Old browsers */
-      background: -moz-linear-gradient(top, #f02b6c 0%, #E7004C 100%);
-      /* FF3.6-15 */
-      background: -webkit-linear-gradient(top, #f02b6c 0%, #E7004C 100%);
-      /* Chrome10-25,Safari5.1-6 */
-      background: linear-gradient(to bottom, #f02b6c 0%, #E7004C 100%);
-      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44afe7', endColorstr='#3198df', GradientType=0);
-      color: #fff;
-      display: block;
-      width: 100%;
-      border: 1px solid rgba(46, 86, 153, 0.0980392);
-      border-bottom-color: rgba(46, 86, 153, 0.4);
-      border-top: 0;
-      border-radius: 4px;
-      font-size: 15px;
-      text-shadow: rgba(46, 86, 153, 0.298039) 0px -1px 0px;
-      line-height: 34px;
-      font-family: 'Montserrat', monospace;
-      -webkit-font-smoothing: antialiased;
-      font-weight: bold;
-      display: block;
-      margin-top: 20px;
-    }
+      /* css loading */
 
-    .btn:hover {
-      cursor: pointer;
-    }
-  </style>
-</head>
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 90px;
+        height: 90px;
+        margin: -76px 0 0 -76px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #00afa3;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
 
-<body style="background: #F3F3F5">
-  <div class="panel">
-    <form id="add-card-form">
-      <div class="payment-form" id="my-card" data-capture-name="true"></div>
-      <button id="btn-add-card" class="btn">Agregar Tarjeta</button>
-    </form>
-  </div>
-</body>
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
 
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-<script>
+      /* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s;
+      }
 
-  window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
-    window.flutter_inappwebview.callHandler('sendDataUser')
-      .then(function (data) {
-        $(function () {
+      @-webkit-keyframes animatebottom {
+        from {
+          bottom: -100px;
+          opacity: 0;
+        }
+        to {
+          bottom: 0px;
+          opacity: 1;
+        }
+      }
 
-          $("#btn-add-card").html(data.text_add_card);
+      @keyframes animatebottom {
+        from {
+          bottom: -100px;
+          opacity: 0;
+        }
+        to {
+          bottom: 0;
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
 
-          $("body").css({ "background": "#" + data.background });
-          $("button").css({ "background": "linear-gradient(to bottom, #" + data.btn_background1 + " 0%, #" + data.btn_background2 + " 100%)" });
+  <body style="background: #f3f3f5">
+    <div id="loader"></div>
 
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-          Payment.init(data.environment, data.paymentClientAppCode, data.paymentClientAppKey);
-          let form = $("#add-card-form");
-          let submitButton = form.find("button");
-          let submitInitialText = submitButton.text();
-          $("#add-card-form").submit(function (e) {
-            let myCard = $('#my-card');
-            $('#messages').text("");
-            let cardToSave = myCard.PaymentForm('card');
-            if (cardToSave == null) {
-              window.flutter_inappwebview.callHandler('return_data', { 'status': 'invalid_card' });
+    <link
+      href="https://cdn.paymentez.com/ccapi/sdk/payment_stable.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      src="https://cdn.paymentez.com/ccapi/sdk/payment_stable.min.js"
+      charset="UTF-8"
+    ></script>
 
-            } else {
-              submitButton.attr("disabled", "disabled").text(data.message_processing_card);
-              Payment.addCard(data.uid, data.email, cardToSave, successHandler, errorHandler);
-            }
-            e.preventDefault();
+    <div class="panel" style="display: none" id="card_paymentez">
+      <form id="add-card-form">
+        <div class="payment-form" id="my-card" data-capture-name="true"></div>
+        <button id="btn-add-card" class="btn">Agregar Tarjeta</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("card_paymentez").style.display = "block";
+
+    window.addEventListener(
+      "flutterInAppWebViewPlatformReady",
+      function (event) {
+        window.flutter_inappwebview
+          .callHandler("sendDataUser")
+          .then(function (data) {
+            $(function () {
+              $("#btn-add-card").html(data.text_add_card);
+
+              $("body").css({ background: "#" + data.background });
+              $("button").css({
+                background:
+                  "linear-gradient(to bottom, #" +
+                  data.btn_background1 +
+                  " 0%, #" +
+                  data.btn_background2 +
+                  " 100%)",
+              });
+
+              Payment.init(
+                data.environment,
+                data.paymentClientAppCode,
+                data.paymentClientAppKey
+              );
+              let form = $("#add-card-form");
+              let submitButton = form.find("button");
+              let submitInitialText = submitButton.text();
+              $("#add-card-form").submit(function (e) {
+                let myCard = $("#my-card");
+                $("#messages").text("");
+                let cardToSave = myCard.PaymentForm("card");
+                if (cardToSave == null) {
+                  window.flutter_inappwebview.callHandler("return_data", {
+                    status: "invalid_card",
+                  });
+                } else {
+                  submitButton
+                    .attr("disabled", "disabled")
+                    .text(data.message_processing_card);
+                  Payment.addCard(
+                    data.uid,
+                    data.email,
+                    cardToSave,
+                    successHandler,
+                    errorHandler
+                  );
+                }
+                e.preventDefault();
+              });
+
+              let successHandler = function (cardResponse) {
+                if (cardResponse.card.status === "valid") {
+                  console.log(
+                    "the card entered has been correctly validated and added."
+                  );
+                  console.log(JSON.stringify(cardResponse.card));
+
+                  window.flutter_inappwebview.callHandler("return_data", {
+                    status: "success",
+                    card: cardResponse.card,
+                  });
+                } else if (cardResponse.card.status === "review") {
+                  console.log(
+                    "The card entered is in review status, please review the paymentez documentation https://developers.paymentez.com/docs/payments/#javascript"
+                  );
+                  console.log(JSON.stringify(cardResponse.card));
+
+                  window.flutter_inappwebview.callHandler("return_data", {
+                    status: "review",
+                    card: cardResponse.card,
+                  });
+                } else {
+                  console.log(
+                    "The card entered is in failure status, please review the paymentez documentation https://developers.paymentez.com/docs/payments/#javascript"
+                  );
+                  console.log(JSON.stringify(cardResponse.card));
+                  window.flutter_inappwebview.callHandler("return_data", {
+                    status: "failure",
+                    card: cardResponse.card,
+                  });
+                }
+
+                submitButton.removeAttr("disabled");
+                submitButton.text(submitInitialText);
+              };
+
+              let errorHandler = function (err) {
+                console.log(
+                  "When using the paymentez service an error occurred. Review the documentation. https://developers.paymentez.com/docs/payments/#javascript"
+                );
+                console.log(JSON.stringify(err.error));
+
+                window.flutter_inappwebview.callHandler("return_data", {
+                  status: "error",
+                  error: JSON.stringify(err.error),
+                });
+                submitButton.removeAttr("disabled");
+                submitButton.text(submitInitialText);
+              };
+            });
           });
-
-
-          let successHandler = function (cardResponse) {
-            if (cardResponse.card.status === 'valid') {
-              console.log('the card entered has been correctly validated and added.')
-              console.log(JSON.stringify(cardResponse.card));
-
-              window.flutter_inappwebview.callHandler('return_data', { 'status': 'success', 'card': cardResponse.card });
-
-            } else if (cardResponse.card.status === 'review') {
-
-              console.log('The card entered is in review status, please review the paymentez documentation https://developers.paymentez.com/docs/payments/#javascript');
-              console.log(JSON.stringify(cardResponse.card));
-
-              window.flutter_inappwebview.callHandler('return_data', { 'status': 'review', 'card': cardResponse.card });
-
-            } else {
-
-              console.log('The card entered is in failure status, please review the paymentez documentation https://developers.paymentez.com/docs/payments/#javascript');
-              console.log(JSON.stringify(cardResponse.card));
-              window.flutter_inappwebview.callHandler('return_data', { 'status': 'failure', 'card': cardResponse.card });
-            }
-
-            submitButton.removeAttr("disabled");
-            submitButton.text(submitInitialText);
-          };
-
-          let errorHandler = function (err) {
-
-            console.log('When using the paymentez service an error occurred. Review the documentation. https://developers.paymentez.com/docs/payments/#javascript');
-            console.log(JSON.stringify(err.error));
-
-            window.flutter_inappwebview.callHandler('return_data', { 'status': 'error', 'error': JSON.stringify(err.error) });
-            submitButton.removeAttr("disabled");
-            submitButton.text(submitInitialText);
-          };
-        });
-      });
-  });
-
-</script>
-
+      }
+    );
+  </script>
 </html>

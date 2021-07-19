@@ -53,6 +53,7 @@ class DataModel {
 class Card {
   Card({
     this.bin,
+    this.alias,
     this.status,
     this.token,
     this.message,
@@ -66,6 +67,9 @@ class Card {
 
   /// bin
   String? bin;
+
+  // alias para identificar la tarjeta, este dato lo coloca el usuario
+  String? alias;
 
   /// status
   String? status;
@@ -96,6 +100,7 @@ class Card {
 
   Card copyWith({
     String? bin,
+    String? alias,
     String? status,
     String? token,
     String? message,
@@ -108,6 +113,7 @@ class Card {
   }) =>
       Card(
         bin: bin ?? this.bin,
+        alias: alias ?? this.alias,
         status: status ?? this.status,
         token: token ?? this.token,
         message: message ?? this.message,
@@ -125,6 +131,7 @@ class Card {
 
   factory Card.fromMap(Map<String, dynamic> json) => Card(
         bin: json["bin"] == null ? null : json["bin"],
+        alias: json["alias"] == null ? null : json["alias"],
         status: json["status"] == null ? null : json["status"],
         token: json["token"] == null ? null : json["token"],
         message: json["message"] == null ? null : json["message"],
@@ -140,6 +147,7 @@ class Card {
 
   Map<String, dynamic> toMap() => {
         "bin": bin == null ? null : bin,
+        "alias": alias == null ? null : alias,
         "status": status == null ? null : status,
         "token": token == null ? null : token,
         "message": message == null ? null : message,
